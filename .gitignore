@@ -1,0 +1,17 @@
+!.gitignore
+!*.dockerfile
+!*.sh
+!README.md
+
+base/*
+!base/*.dockerfile
+!base/*.sh
+!base/Toolchain.cmake
+
+intermediate/*
+!intermediate/*.dockerfile
+!intermediate/*.sh
+
+userver/*
+!userver/*.dockerfile
+!userver/*.sh
