@@ -161,20 +161,6 @@ RUN mkdir $LIBEV_BUILD_DIR && cd $LIBEV_BUILD_DIR && \
     make -j$NPROC && make install && \
     cd .. && rm -rf $LIBEV_SOURCE_DIR $LIBEV_BUILD_DIR
 
-ENV ABSEIL_SOURCE_DIR=/abseil-cpp
-ENV ABSEIL_BUILD_DIR=$ABSEIL_SOURCE_DIR-build
-COPY $ABSEIL_SOURCE_DIR $ABSEIL_SOURCE_DIR
-RUN mkdir $ABSEIL_BUILD_DIR && cd $ABSEIL_BUILD_DIR && \
-    cmake -S $ABSEIL_SOURCE_DIR -B . \
-        -DABSL_PROPAGATE_CXX_STD=ON \
-        -DABSL_ENABLE_INSTALL=ON \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_INSTALL_PREFIX=$TOOLCHAIN_DIR/usr \
-        -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_DIR/Toolchain.cmake \
-        -GNinja && \
-    cmake --build . && cmake --install . && \
-    cd .. && rm -rf $ABSEIL_SOURCE_DIR $ABSEIL_BUILD_DIR
-
 ENV CARES_SOURCE_DIR=/c-ares
 ENV CARES_BUILD_DIR=$CARES_SOURCE_DIR-build
 COPY $CARES_SOURCE_DIR $CARES_SOURCE_DIR
@@ -201,21 +187,6 @@ RUN mkdir $RE2_BUILD_DIR && cd $RE2_BUILD_DIR && \
     cmake --build . && cmake --install . && \
     cd .. && rm -rf $RE2_SOURCE_DIR $RE2_BUILD_DIR
 
-ENV PROTOBUF_SOURCE_DIR=/protobuf
-ENV PROTOBUF_BUILD_DIR=$PROTOBUF_SOURCE_DIR-build
-COPY $PROTOBUF_SOURCE_DIR $PROTOBUF_SOURCE_DIR
-RUN mkdir $PROTOBUF_BUILD_DIR && cd $PROTOBUF_BUILD_DIR && \
-    cmake -S $PROTOBUF_SOURCE_DIR -B . \
-        -Dprotobuf_BUILD_SHARED_LIBS=OFF \
-        -Dprotobuf_BUILD_TESTS=OFF \
-        -Dprotobuf_ABSL_PROVIDER=package \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_INSTALL_PREFIX=$TOOLCHAIN_DIR/usr \
-        -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_DIR/Toolchain.cmake \
-        -GNinja && \
-    cmake --build . && cmake --install . && \
-    cd .. && rm -rf $PROTOBUF_SOURCE_DIR $PROTOBUF_BUILD_DIR
-
 ENV GRPC_SOURCE_DIR=/grpc
 ENV GRPC_BUILD_DIR=$GRPC_SOURCE_DIR-build
 COPY $GRPC_SOURCE_DIR $GRPC_SOURCE_DIR
@@ -228,9 +199,7 @@ RUN mkdir $GRPC_BUILD_DIR && cd $GRPC_BUILD_DIR && \
         -DgRPC_BUILD_GRPC_PHP_PLUGIN=OFF \
         -DgRPC_BUILD_GRPC_RUBY_PLUGIN=OFF \
         -DgRPC_BUILD_GRPC_CSHARP_PLUGIN=OFF \
-        -DgRPC_ABSL_PROVIDER=package \
         -DgRPC_CARES_PROVIDER=package \
-        -DgRPC_PROTOBUF_PROVIDER=package \
         -DgRPC_RE2_PROVIDER=package \
         -DgRPC_SSL_PROVIDER=package \
         -DgRPC_ZLIB_PROVIDER=package \
