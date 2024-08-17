@@ -33,10 +33,7 @@
 - [libev 4.33](http://dist.schmorp.de/libev/libev-4.33.tar.gz)
 - [jemalloc 5.3.0](https://github.com/jemalloc/jemalloc/archive/refs/tags/5.3.0.tar.gz)
 - [zstd 1.5.6](https://github.com/facebook/zstd/releases/tag/v1.5.6)
-- [abseil-cpp 20240116.0](https://github.com/abseil/abseil-cpp/archive/refs/tags/20240116.0.tar.gz)
 - [c-ares 1.33.0](https://github.com/c-ares/c-ares/archive/refs/tags/v1.33.0.tar.gz)
-- [re2 2022-04-01](https://github.com/google/re2/archive/refs/tags/2022-04-01.tar.gz)
-- [protobuf 26.1](https://github.com/protocolbuffers/protobuf/archive/refs/tags/v26.1.tar.gz)
 
 ### Userver
 - [userver](https://github.com/userver-framework/userver.git)

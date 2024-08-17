@@ -175,24 +175,12 @@ RUN mkdir $CARES_BUILD_DIR && cd $CARES_BUILD_DIR && \
     cmake --build . && cmake --install . && \
     cd .. && rm -rf $CARES_SOURCE_DIR $CARES_BUILD_DIR
 
-ENV RE2_SOURCE_DIR=/re2
-ENV RE2_BUILD_DIR=$RE2_SOURCE_DIR-build
-COPY $RE2_SOURCE_DIR $RE2_SOURCE_DIR
-RUN mkdir $RE2_BUILD_DIR && cd $RE2_BUILD_DIR && \
-    cmake -S $RE2_SOURCE_DIR -B . \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_INSTALL_PREFIX=$TOOLCHAIN_DIR/usr \
-        -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_DIR/Toolchain.cmake \
-        -GNinja && \
-    cmake --build . && cmake --install . && \
-    cd .. && rm -rf $RE2_SOURCE_DIR $RE2_BUILD_DIR
-
 ENV GRPC_SOURCE_DIR=/grpc
 ENV GRPC_BUILD_DIR=$GRPC_SOURCE_DIR-build
 COPY $GRPC_SOURCE_DIR $GRPC_SOURCE_DIR
 RUN mkdir $GRPC_BUILD_DIR && cd $GRPC_BUILD_DIR && \
     cmake -B . -S $GRPC_SOURCE_DIR \
-	-Dprotobuf_BUILD_SHARED_LIBS=OFF \
+	    -Dprotobuf_BUILD_SHARED_LIBS=OFF \
         -DgRPC_BUILD_TESTS=OFF \
         -DgRPC_BUILD_GRPC_NODE_PLUGIN=OFF \
         -DgRPC_BUILD_GRPC_OBJECTIVE_C_PLUGIN=OFF \
@@ -200,7 +188,6 @@ RUN mkdir $GRPC_BUILD_DIR && cd $GRPC_BUILD_DIR && \
         -DgRPC_BUILD_GRPC_RUBY_PLUGIN=OFF \
         -DgRPC_BUILD_GRPC_CSHARP_PLUGIN=OFF \
         -DgRPC_CARES_PROVIDER=package \
-        -DgRPC_RE2_PROVIDER=package \
         -DgRPC_SSL_PROVIDER=package \
         -DgRPC_ZLIB_PROVIDER=package \
         -DgRPC_BENCHMARK_PROVIDER=package \
