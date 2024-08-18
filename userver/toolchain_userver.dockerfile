@@ -27,7 +27,6 @@ RUN python3 -m pip install setuptools Jinja2 requests websockets voluptuous pyte
         -DUSERVER_FEATURE_POSTGRESQL=ON \
         -DUSERVER_FEATURE_GRPC=ON \
         -DUSERVER_FEATURE_OTLP=ON \
-        -DUSERVER_DISABLE_PHDR_CACHE=ON \
         -DUSERVER_CHECK_PACKAGE_VERSIONS=OFF \
         -DUSERVER_PIP_USE_SYSTEM_PACKAGES=ON \
         -DUSERVER_PIP_OPTIONS='--no-index' \
@@ -42,7 +41,6 @@ RUN python3 -m pip install setuptools Jinja2 requests websockets voluptuous pyte
         -DUSERVER_FEATURE_POSTGRESQL=ON \
         -DUSERVER_FEATURE_GRPC=ON \
         -DUSERVER_FEATURE_OTLP=ON \
-        -DUSERVER_DISABLE_PHDR_CACHE=ON \
         -DUSERVER_CHECK_PACKAGE_VERSIONS=OFF \
         -DUSERVER_PIP_USE_SYSTEM_PACKAGES=ON \
         -DUSERVER_PIP_OPTIONS='--no-index' \
