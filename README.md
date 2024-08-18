@@ -15,7 +15,7 @@
 - [zlib 1.3.1](https://github.com/madler/zlib/archive/refs/tags/v1.3.1.tar.gz)
 - [libffi 3.4.6](https://github.com/libffi/libffi/archive/refs/tags/v3.4.6.tar.gz)
 - [pkg config 0.29.2](https://pkgconfig.freedesktop.org/releases/pkg-config-0.29.2.tar.gz)
-- [libxcrypt](https://github.com/besser82/libxcrypt/archive/refs/tags/v4.4.36.tar.gz)
+- [libxcrypt 4.4.36](https://github.com/besser82/libxcrypt/archive/refs/tags/v4.4.36.tar.gz)
 - [autoconf 2.72](https://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.gz)
 - [automake 1.17](https://ftp.gnu.org/gnu/automake/automake-1.17.tar.gz)
 - [libtool 2.4](https://ftp.gnu.org/gnu/libtool/libtool-2.4.tar.gz)
@@ -34,6 +34,9 @@
 - [jemalloc 5.3.0](https://github.com/jemalloc/jemalloc/archive/refs/tags/5.3.0.tar.gz)
 - [zstd 1.5.6](https://github.com/facebook/zstd/releases/tag/v1.5.6)
 - [c-ares 1.33.0](https://github.com/c-ares/c-ares/archive/refs/tags/v1.33.0.tar.gz)
+- [postgresql 16.4](https://ftp.postgresql.org/pub/source/v16.4/postgresql-16.4.tar.gz)
+- [openldap 2.5.18](https://github.com/openldap/openldap/archive/refs/tags/OPENLDAP_REL_ENG_2_5_18.tar.gz)
+- [krb5 1.21.3](https://github.com/krb5/krb5/archive/refs/tags/krb5-1.21.3-final.tar.gz)
 
 ### Userver
 - [userver](https://github.com/userver-framework/userver.git)

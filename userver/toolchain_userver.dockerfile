@@ -15,16 +15,16 @@ COPY $APICOMMONPROTOS_SOURCE_DIR $APICOMMONPROTOS_SOURCE_DIR
 ENV OPENTELEMETRY_PROTO_SOURCE_DIR=/opentelemetry-proto
 COPY $OPENTELEMETRY_PROTO_SOURCE_DIR $OPENTELEMETRY_PROTO_SOURCE_DIR
 
-# userver
 ENV USERVER_SOURCE_DIR=/userver
 COPY $USERVER_SOURCE_DIR $USERVER_SOURCE_DIR
-RUN python3 -m pip install setuptools Jinja2 requests websockets voluptuous pytest_asyncio==0.21.2 zstd yandex-taxi-testsuite PyYaml uvloop grpcio grpcio-tools && \
+RUN python3 -m pip install setuptools Jinja2 requests websockets voluptuous pytest_asyncio==0.21.2 zstd yandex-taxi-testsuite PyYaml uvloop grpcio grpcio-tools yandex-pgmigrate && \
     cd $USERVER_SOURCE_DIR && \
     cmake -S . -B build_release \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_INSTALL_PREFIX=$TOOLCHAIN_DIR/usr \
         -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_DIR/Toolchain.cmake \
         -DUSERVER_INSTALL=ON \
+        -DUSERVER_FEATURE_POSTGRESQL=ON \
         -DUSERVER_FEATURE_GRPC=ON \
         -DUSERVER_FEATURE_OTLP=ON \
         -DUSERVER_DISABLE_PHDR_CACHE=ON \
@@ -39,6 +39,7 @@ RUN python3 -m pip install setuptools Jinja2 requests websockets voluptuous pyte
         -DCMAKE_INSTALL_PREFIX=$TOOLCHAIN_DIR/usr \
         -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_DIR/Toolchain.cmake \
         -DUSERVER_INSTALL=ON \
+        -DUSERVER_FEATURE_POSTGRESQL=ON \
         -DUSERVER_FEATURE_GRPC=ON \
         -DUSERVER_FEATURE_OTLP=ON \
         -DUSERVER_DISABLE_PHDR_CACHE=ON \

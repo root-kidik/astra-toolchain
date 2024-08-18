@@ -180,7 +180,6 @@ ENV GRPC_BUILD_DIR=$GRPC_SOURCE_DIR-build
 COPY $GRPC_SOURCE_DIR $GRPC_SOURCE_DIR
 RUN mkdir $GRPC_BUILD_DIR && cd $GRPC_BUILD_DIR && \
     cmake -B . -S $GRPC_SOURCE_DIR \
-	    -Dprotobuf_BUILD_SHARED_LIBS=OFF \
         -DgRPC_BUILD_TESTS=OFF \
         -DgRPC_BUILD_GRPC_NODE_PLUGIN=OFF \
         -DgRPC_BUILD_GRPC_OBJECTIVE_C_PLUGIN=OFF \
@@ -197,6 +196,55 @@ RUN mkdir $GRPC_BUILD_DIR && cd $GRPC_BUILD_DIR && \
         -GNinja && \
     cmake --build . && cmake --install . && \
     cd .. && rm -rf $GRPC_SOURCE_DIR $GRPC_BUILD_DIR
+
+ENV POSTGRESQL_SOURCE_DIR=/postgresql
+ENV POSTGRESQL_BUILD_DIR=$POSTGRESQL_SOURCE_DIR-build
+COPY $POSTGRESQL_SOURCE_DIR $POSTGRESQL_SOURCE_DIR
+RUN mkdir $POSTGRESQL_BUILD_DIR && cd $POSTGRESQL_BUILD_DIR && \
+    $POSTGRESQL_SOURCE_DIR/configure \
+        CC="$TOOLCHAIN_CC" \
+        CXX="$TOOLCHAIN_CXX" \
+        CFLAGS="$TOOLCHAIN_CFLAGS" \
+        CXXFLAGS="$TOOLCHAIN_CXXFLAGS" \
+        LDFLAGS="$TOOLCHAIN_LDFLAGS" \
+        --without-icu \
+        --without-readline \
+        --prefix=$TOOLCHAIN_DIR/usr && \
+    make -j$NPROC && make install && \
+    cd .. && rm -rf $POSTGRESQL_SOURCE_DIR $POSTGRESQL_BUILD_DIR
+
+COPY init_postgresql.sh $TOOLCHAIN_DIR/init_postgresql.sh
+
+ENV OPENLDAP_SOURCE_DIR=/openldap
+ENV OPENLDAP_BUILD_DIR=$OPENLDAP_SOURCE_DIR-build
+COPY $OPENLDAP_SOURCE_DIR $OPENLDAP_SOURCE_DIR
+RUN mkdir $OPENLDAP_BUILD_DIR && cd $OPENLDAP_BUILD_DIR && \
+    $OPENLDAP_SOURCE_DIR/configure \
+        CC="$TOOLCHAIN_CC" \
+        CXX="$TOOLCHAIN_CXX" \
+        CFLAGS="$TOOLCHAIN_CFLAGS" \
+        CXXFLAGS="$TOOLCHAIN_CXXFLAGS" \
+        LDFLAGS="$TOOLCHAIN_LDFLAGS" \
+        --enable-static=yes \
+        --enable-shared=no \
+        --prefix=$TOOLCHAIN_DIR/usr && \
+    make -j$NPROC && make install && \
+    cd .. && rm -rf $OPENLDAP_SOURCE_DIR $OPENLDAP_BUILD_DIR
+
+ENV KRB5_SOURCE_DIR=/krb5
+ENV KRB5_BUILD_DIR=$KRB5_SOURCE_DIR-build
+COPY $KRB5_SOURCE_DIR $KRB5_SOURCE_DIR
+RUN cd $KRB5_SOURCE_DIR/src && autoreconf && \
+    mkdir $KRB5_BUILD_DIR && cd $KRB5_BUILD_DIR && \
+    $KRB5_SOURCE_DIR/src/configure \
+        CC="$TOOLCHAIN_CC" \
+        CXX="$TOOLCHAIN_CXX" \
+        CFLAGS="$TOOLCHAIN_CFLAGS" \
+        CXXFLAGS="$TOOLCHAIN_CXXFLAGS" \
+        LDFLAGS="$TOOLCHAIN_LDFLAGS" \
+        --prefix=$TOOLCHAIN_DIR/usr && \
+    make -j$NPROC && make install && \
+    cd .. && rm -rf $KRB5_SOURCE_DIR $KRB5_BUILD_DIR
 
 FROM dockerhub.lemz.t/library/astralinux:se1.5
 COPY --from=0 $TOOLCHAIN_DIR $TOOLCHAIN_DIR
