@@ -4,7 +4,9 @@
 1. Copy from container `toolchain:userver` folder `/toolchain` to self machine to `/toolchain`
 2. Run `/toolchain/init_postgresql.sh`
 3. Add in cmake project `set(CMAKE_TOOLCHAIN_FILE /toolchain/Toolchain.cmake)`
-*. Every run you must
+
+### How to use?
+- Every run you must
     - `PATH='/toolchain/usr/bin:$PATH'`
     - `su -c 'cd ~ && /toolchain/usr/bin/pg_ctl -D /toolchain/usr/local/pgsql/data -l logfile start' postgres`
 
