@@ -7,8 +7,11 @@
 
 ### How to use?
 - Every run you must
-    - `PATH='/toolchain/usr/bin:$PATH'`
-    - `su -c 'cd ~ && /toolchain/usr/bin/pg_ctl -D /toolchain/usr/local/pgsql/data -l logfile start' postgres`
+    - `Every enviroment`: `PATH='/toolchain/usr/bin:$PATH'`
+    - `Every startup`: `su -c 'cd ~ && /toolchain/usr/bin/pg_ctl -D /toolchain/usr/local/pgsql/data -l logfile start' postgres`
+
+### How to deploy?
+- Deploy your project with folder `/toolchain`
 
 ### Base
 - [make 4.4](https://ftp.gnu.org/gnu/make/make-4.4.tar.gz)
