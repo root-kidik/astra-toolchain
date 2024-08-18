@@ -1,5 +1,11 @@
 # Toolchain
 
+### How to use?
+1. Copy from container `toolchain:userver` folder `/toolchain` to self machine to `/toolchain`
+2. Run `./toolchain/init_postgresql.sh`
+4. Set `PATH='/toolchain/usr/bin:$PATH'`
+3. Add in cmake project `set(CMAKE_TOOLCHAIN_FILE /toolchain/Toolchain.cmake)`
+
 ### Base
 - [make 4.4](https://ftp.gnu.org/gnu/make/make-4.4.tar.gz)
 - [bison 3.8](https://ftp.gnu.org/gnu/bison/bison-3.8.tar.gz)
